@@ -10,3 +10,5 @@ hiper_glm <- function(design, outcome, model = "linear") {
   class(hglm_out) <- "hglm"
   return(hglm_out)
 }
+
+#usethis::use_testthat()
