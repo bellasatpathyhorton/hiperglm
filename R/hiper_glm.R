@@ -4,9 +4,9 @@ hiper_glm <- function(design, outcome, model = "linear", option = list()) {
   if (!(model %in% supported_model)) {
     stop(sprintf("The model %s is not supported", model))
   }
-  warning("'hiper_glm' is yet to be implemented")
   #TO DO: maximize likelihood
-  hglm_out <- list()
+  coef = solve(t(design) %*% design, t(design) %*% outcome)
+  hglm_out <- list(coef)
   class(hglm_out) <- "hglm"
   return(hglm_out)
 }
