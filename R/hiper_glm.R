@@ -6,13 +6,13 @@ hiper_glm <- function(design, outcome, model = "linear", mle_finder) {
   }
 
   if (mle_finder == "pseudoinverse") {
-    coef = solve(t(design) %*% design, t(design) %*% outcome)
+    coef = pseudoinverse_finder(design, outcome)
   }
 
   else if (mle_finder == "BFGS") {
-    optimal = stats::optim(par = rnorm(n = dim(design)[2]), fn = log_likelihood, design = design, outcome = outcome, gr = gradient, method = "BFGS")
-    coef = optimal$par
+    coef = BFGS_finder(design, outcome)
   }
+
   hglm_out <- list(coef)
   class(hglm_out) <- "hglm"
   return(hglm_out)

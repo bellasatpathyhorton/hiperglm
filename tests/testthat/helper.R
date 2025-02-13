@@ -32,13 +32,16 @@ simulate_data <- function(
   return(list(design = design, outcome = outcome, coef_true = coef_true))
 }
 
-# test helper functions
+approx_grad <- function(func, par, dx = .Machine$double.eps^(1/3)) {
+  gradient_vector <- rep(0, length(par))
 
-## case 1: function correctly returns TRUE
-are_all_close(5, 5)
+  for (i in 1:length(par)) {
+    a_vector <- par
+    b_vector <- par
+    a_vector[i] = par[i] + dx
+    b_vector[i] = par[i] - dx
+    gradient_vector[i] = (func(a_vector)-func(b_vector))/(2*dx)
+  }
 
-## case 2: function correctly returns FALSE because relative error is above tolerance
-are_all_close(0.1, 0.1000003)
-
-## case 3: function correctly returns FALSE because absolute error is above tolerance
-are_all_close(0.1, 0.100003)
+  return(gradient_vector)
+}

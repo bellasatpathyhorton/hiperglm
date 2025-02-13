@@ -5,7 +5,7 @@ print.hglm <- function(hglm_out) {
 
 #' @export
 coef.hglm <- function(hglm_out) {
-  return(coef)
+  return(coef)  # should be hglm_out$coef, but only returns NULL if i do that
 }
 
 #' @export
