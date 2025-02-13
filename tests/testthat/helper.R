@@ -31,3 +31,14 @@ simulate_data <- function(
   outcome <- expected_mean + noise
   return(list(design = design, outcome = outcome, coef_true = coef_true))
 }
+
+# test helper functions
+
+## case 1: function correctly returns TRUE
+are_all_close(5, 5)
+
+## case 2: function correctly returns FALSE because relative error is above tolerance
+are_all_close(0.1, 0.1000003)
+
+## case 3: function correctly returns FALSE because absolute error is above tolerance
+are_all_close(0.1, 0.100003)
